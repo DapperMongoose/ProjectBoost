@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5yusp4eacwav"]
+[gd_scene load_steps=15 format=3 uid="uid://c5yusp4eacwav"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_mf8ef"]
 [ext_resource type="AudioStream" uid="uid://seyk725ri11h" path="res://Audio/SFX - Death Explosion.ogg" id="2_3sqen"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Particles/booster_particles.tscn" id="5_o301e"]
 [ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://Particles/explosion_particles.tscn" id="6_k1vd7"]
 [ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://Particles/success_particles.tscn" id="7_7jyqf"]
+[ext_resource type="Material" uid="uid://c3bpiovxrj07h" path="res://ShipRedMaterial.tres" id="8_vygeb"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_in0mi"]
 
@@ -72,30 +73,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -1, 0)
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("CylinderMesh_16far")
 
 [node name="LeftThruster" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.37, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("CylinderMesh_p3f00")
 skeleton = NodePath("../..")
 
 [node name="LeftThrusterNose" type="MeshInstance3D" parent="Body/LeftThruster"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372638, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("SphereMesh_cgkva")
 skeleton = NodePath("../../..")
 
 [node name="Cockpit" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("CylinderMesh_x2o1k")
 skeleton = NodePath("../..")
 
 [node name="RightThruster" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.37, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("CylinderMesh_p3f00")
 skeleton = NodePath("../..")
 
 [node name="RightThrusterNose" type="MeshInstance3D" parent="Body/RightThruster"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.373, 0)
+material_override = ExtResource("8_vygeb")
 mesh = SubResource("SphereMesh_cgkva")
 skeleton = NodePath("../../..")
 
