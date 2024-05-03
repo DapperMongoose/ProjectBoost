@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5yusp4eacwav"]
+[gd_scene load_steps=14 format=3 uid="uid://c5yusp4eacwav"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_mf8ef"]
 [ext_resource type="AudioStream" uid="uid://seyk725ri11h" path="res://Audio/SFX - Death Explosion.ogg" id="2_3sqen"]
@@ -12,6 +12,25 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gwop5"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_16far"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p3f00"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.75
+
+[sub_resource type="SphereMesh" id="SphereMesh_cgkva"]
+radius = 0.15
+height = 0.25
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x2o1k"]
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+
 [node name="Player" type="RigidBody3D"]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -23,6 +42,7 @@ angular_damp = 3.0
 script = ExtResource("1_mf8ef")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CylinderMesh_in0mi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -41,13 +61,42 @@ stream = ExtResource("4_typ4x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="RightBoosterParticles" parent="." instance=ExtResource("5_o301e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -1, 0)
 
 [node name="LeftBoosterParticles" parent="." instance=ExtResource("5_o301e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -1, 0)
 
 [node name="ExplosionParticles" parent="." instance=ExtResource("6_k1vd7")]
 
 [node name="SuccessParticles" parent="." instance=ExtResource("7_7jyqf")]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("CylinderMesh_16far")
+
+[node name="LeftThruster" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.37, 0)
+mesh = SubResource("CylinderMesh_p3f00")
+skeleton = NodePath("../..")
+
+[node name="LeftThrusterNose" type="MeshInstance3D" parent="Body/LeftThruster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.372638, 0)
+mesh = SubResource("SphereMesh_cgkva")
+skeleton = NodePath("../../..")
+
+[node name="Cockpit" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_x2o1k")
+skeleton = NodePath("../..")
+
+[node name="RightThruster" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.37, 0)
+mesh = SubResource("CylinderMesh_p3f00")
+skeleton = NodePath("../..")
+
+[node name="RightThrusterNose" type="MeshInstance3D" parent="Body/RightThruster"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.373, 0)
+mesh = SubResource("SphereMesh_cgkva")
+skeleton = NodePath("../../..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
